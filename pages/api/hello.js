@@ -1,5 +1,6 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import getsession from "/lib/session"
 
-export default function handler(req, res) {
+export default async function handler(req, res) { 
+  if(!session) return res.status(403).send("Forbiden")
   res.status(200).json({ name: 'John Doe' })
 }
