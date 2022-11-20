@@ -1,6 +1,6 @@
 import stringHash from 'string-hash';
 import { sign } from "jsonwebtoken";
-import User from "/model/user"; 
+import User from "/model/usuario";
 import { serialize } from "cookie";
 
 export default async function loginHandler(req, res) {
@@ -9,7 +9,7 @@ export default async function loginHandler(req, res) {
   if(user != null)
     return res.status(401).json({ message: "User exist" });
 
-  let newUser = await User.create("New user", email ,stringHash(password), phone);
+  let newUser = await User.create("New user", email ,"none", "/newusericon.jpg","[]",0,stringHash(password), phone);
   if(newUser != null){
     const serialized = createTokenSerialized(email, "New user");
     res.setHeader("Set-Cookie", serialized);

@@ -1,8 +1,8 @@
 import Link from 'next/link'
-export default function Card({bg, img, title, detail}) {
+export default function Card({bg, href, img, title, detail}) {
   return (
     <div className="card-g rounded bg-1 my-1 bg-white">
-        <Link href="#">
+        <Link href={href}>
           <div style={{"background":bg}} className="py-2  py-md-4 text-center">
             <img width="90px" src={img} alt=""/>
           </div>
@@ -25,6 +25,7 @@ export default function Card({bg, img, title, detail}) {
 }
 
 Card.defaultProps = {
+  href:"#",
   bg:"#0273f5",
   img: "https://www.kaiwik.com/icons/businesspersonalization_spot_96x96_3e9cfdaa7fadd7ed314f7da7a96b59d3.png",
   title: "NEXTJS TITLE APP",
@@ -32,10 +33,10 @@ Card.defaultProps = {
 }
 
 
-export function CardSmall({url, bg, img, title, detail}) {
+export function CardSmall({href, bg, img, title, detail}) {
   return (
     <div className="shadow-sm bg-white rounded bg-1 my-1">
-      <Link href={url}>
+      <Link href={href}>
       <div className="row p-3">
         <div className="col-8 ">
           <strong className="text-primary">{title}</strong>
@@ -51,7 +52,7 @@ export function CardSmall({url, bg, img, title, detail}) {
 }
 
 CardSmall.defaultProps = {
-  url:"#",
+  href:"#",
   bg:"#0273f5",
   img: "https://www.kaiwik.com/icons/businesspersonalization_spot_96x96_3e9cfdaa7fadd7ed314f7da7a96b59d3.png",
   title: "NEXTJS TITLE APP",

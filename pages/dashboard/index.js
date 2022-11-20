@@ -14,13 +14,22 @@ export default function Dashboard({session}) {
 
       <div className="row">
         <div className="col-md-4">
-          <Card />
+          <Card title="PERFIL WEB"
+            detail="Lorem set impsuln"
+            href="/dashboard/web"
+          />
         </div>
         <div className="col-md-4">
-          <Card bg="#fec514"/>
+          <Card bg="#fec514"
+            title="CONFIGURACION"
+            detail="Estado de la cuenta general"
+           />
         </div>
         <div className="col-md-4">
-          <Card bg="#00bfb3"/>
+          <Card bg="#00bfb3"
+            title="BI DASHBOARD"
+            detail="Charts lorem set data"
+          />
         </div>
       </div>
       <h4 className="  pt-5 ">
@@ -28,13 +37,22 @@ export default function Dashboard({session}) {
       </h4>
       <div className="row">
         <div className="col-md-4">
-          <CardSmall />
+          <CardSmall
+            title="CATEGORIA"
+            href="/dashboard/categoriamenu"
+           />
         </div>
         <div className="col-md-4">
-          <CardSmall bg="#fec514"/>
+          <CardSmall bg="#fec514"
+            title="PRODUCTOS"
+            href="/dashboard/producto"
+          />
         </div>
         <div className="col-md-4">
-          <CardSmall bg="#00bfb3"/>
+          <CardSmall bg="#00bfb3"
+            title="PEDIDOS"
+            href="/dashboard/pedido"
+          />
         </div>
       </div>
       {session.roles.includes("sudo")
@@ -44,10 +62,21 @@ export default function Dashboard({session}) {
           </h4>
           <div className="row">
             <div className="col-md-4">
-              <CardSmall url="/dashboard/user" />
+              <CardSmall
+                href="/dashboard/usuario"
+                title="USUARIOS"
+              />
             </div>
             <div className="col-md-4">
-              <CardSmall bg="#fec514"/>
+              <CardSmall bg="#fec514"
+                href="/dashboard/categoria"
+                title="CATEGORIA"
+              />
+            </div>
+            <div className="col-md-4">
+              <CardSmall bg="#fec514"
+                title="BI GLOBAL"
+              />
             </div>
           </div>
         </div>
@@ -58,8 +87,9 @@ export default function Dashboard({session}) {
   )
 }
 
+
 export async function getServerSideProps(context){
-  let session = await getsession(context.req); 
+  let session = await getsession(context.req);
   if(session)return {
     props:{
       session

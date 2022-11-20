@@ -2,7 +2,7 @@ import stringHash from 'string-hash';
 import { sign } from "jsonwebtoken";
 import { serialize } from "cookie";
 
-import User from "/model/user";
+import User from "/model/usuario";
 
 export default async function loginHandler(req, res) {
   const {email, password} = req.body;
@@ -25,7 +25,7 @@ export default async function loginHandler(req, res) {
       message: "Inicio correctamente"
      });
   }else {
-     return res.status(401).json({ 
+     return res.status(401).json({
        message: "Ups! error interno"
       });
   }

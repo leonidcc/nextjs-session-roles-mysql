@@ -11,7 +11,9 @@ export default function Nav({title, logo, children}){
           </strong>
          </Link>
          <div className="text-white">
+         <Link href="/dashboard/my">
            {children}
+          </Link>
          </div>
 
       </div>

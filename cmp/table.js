@@ -31,34 +31,36 @@ export default function Table({columns, rows, pageSize=5 }){
 
   return (
     <div>
-    <div className="row pb-2 ">
-      <div className=" col-md-8">
+    <div className="row pt-2 ">
+      <div className=" col-md-6">
         <div className="form-floating pb-4">
-           <input id="filtroproducto" type="email" placeholder="EtiquetasNúmeroNombre" className="shadow-sm form-control" id="floatingInputValue" placeholder="name@example.com"/>
-           <label for="floatingInputValue">Escribe tu busqueda </label>
+           <input  type="email" placeholder="EtiquetasNúmeroNombre" className="shadow-sm form-control pb-0"   />
+           <label for="floatingInputValue">Filtre los resultados </label>
          </div>
       </div>
-      <div className="col-md-4 ">
-        <div className="form-floating  ">
-          <select className="form-select shadow-sm"  >
-            <option value="1">Todos</option>
-            { columns.map((c,i)=>{
-              return <option key={i} value="1">{c.field}</option>
-              })
-            }
-          </select>
-          <label for="floatingSelect">Seleccione una columna</label>
-        </div>
+      <div className=" col-md-3">
+        <div className="form-floating pb-4">
+           <input  type="datetime-local" placeholder="EtiquetasNúmeroNombre" className="shadow-sm form-control pb-0"   />
+           <label for="floatingInputValue">Filtre los resultados </label>
+         </div>
+      </div>
+      <div className=" col-md-3">
+        <div className="form-floating pb-4">
+           <input  type="datetime-local" placeholder="EtiquetasNúmeroNombre" className="shadow-sm form-control pb-0"   />
+           <label for="floatingInputValue">Filtre los resultados </label>
+         </div>
       </div>
       </div>
-    <div className="w-100  ">
-      <TableHeader columns={columns}/>
+    <div className="tabla  ">
       <TableBody
         pageSize={pageSize}
         columns={columns}
         rows={rows}
-      />
+       >
+        <TableHeader columns={columns}/>
+      </TableBody>
     </div>
+
     </div>
   )
 }
@@ -80,7 +82,7 @@ function TableHeader({columns}){
   }
 
   return (
-    <div className="d-flex px-3 shadow-sm bg-gray">
+    <div className="d-inline-flex px-3 shadow-sm bg-gray">
       { columns.map((c,i)=>{
         if(c.sort == false)
         return <div  style={{width:`${c.width}px`}} className="pb-2">
@@ -109,14 +111,16 @@ function TableHeader({columns}){
                 </strong>):''
               }
             </div>
+
           </div>;
 
         })
       }
+
     </div>
   )
 }
-function TableBody({columns, rows, pageSize}){
+function TableBody({children, columns, rows, pageSize}){
   const [index, setIndex] = useState(0);
 
   const previus = ()=>{
@@ -131,10 +135,11 @@ function TableBody({columns, rows, pageSize}){
   let data = [...rows].slice(pageSize*index,pageSize*index+pageSize);
   return (
     <div>
-      <div className=" ">
+      <div className="tabla pb-4 px-1 ">
+        {children}
         { data.map((d,i)=>{
             return (<div key={i} >
-                <Item data={d}  columns={columns} index={i}/>
+                <Item data={d}  columns={columns} index={i} rows={rows}/>
               </div>)
           })
         }
@@ -160,18 +165,26 @@ function TableBody({columns, rows, pageSize}){
         </ul>
       </nav>
     </div>
+    <style jsx>
+    {`
+      .tabla{
+        width:100%;
+        overflow-x:scroll;
+      }
+      `}
+    </style>
     </div>
   )
 }
 
-function Item({data, columns, index}) {
+function Item({data, columns, index, rows}) {
   return (
-    <div className="d-flex p-3 bg-white shadow-sm mb-2">
+    <div className="d-inline-flex   px-3 py-4 bg-white shadow-sm mb-2">
       { columns.map((c,i)=>{
           return (
             <div  key={i} style={{width:`${c.width}px`}} className="text-truncate" >
               {c.valueGetter
-                ?(c.valueGetter(data, index))
+                ?(c.valueGetter(data, rows, index))
                 :(data[c.field])
               }
             </div>
