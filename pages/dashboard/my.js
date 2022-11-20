@@ -71,7 +71,7 @@ export default function UserPage({  session }) {
 
 export const getServerSideProps = async (context) => {
   const session = await getsession(context.req);
-  if(session && session.roles.includes("sudo")){
+  if(session  ){
     return {
       props: {
        session
